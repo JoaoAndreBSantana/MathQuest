@@ -40,7 +40,6 @@ public class TelaInst extends JFrame {
         botaoContinuar.setBounds(botaoX, 450, 200, 50);
 
         fundo.add(botaoContinuar);
-
         setVisible(true);
     }
 }
