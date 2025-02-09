@@ -1,44 +1,44 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class TelaInicial extends JFrame {
-    public TelaInicial() {
+public class TelaInicial extends JPanel {
+    public TelaInicial(CardLayout cardLayout, JPanel cardPanel) {
+        // Configura o layout do painel como nulo para posicionar os componentes manualmente
+        setLayout(null);
+
+        // Carrega a imagem de fundo
         ImageIcon fundoIcon = new ImageIcon(getClass().getResource(Constantes.CAMINHO_FUNDO));
-        setTitle("MathQuest");
-        setSize(fundoIcon.getIconWidth(), fundoIcon.getIconHeight());
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-
         JLabel fundo = new JLabel(fundoIcon);
-        fundo.setLayout(null);
+        fundo.setBounds(0, 0, fundoIcon.getIconWidth(), fundoIcon.getIconHeight());
         add(fundo);
 
+        // Carrega o logo
         ImageIcon logoIcon = new ImageIcon(getClass().getResource(Constantes.CAMINHO_LOGO));
         JLabel logo = new JLabel(logoIcon);
         int logoX = (fundoIcon.getIconWidth() - logoIcon.getIconWidth()) / 2;
         logo.setBounds(logoX, 50, logoIcon.getIconWidth(), logoIcon.getIconHeight());
         fundo.add(logo);
 
+        // Botão "Iniciar Jogo"
         JButton botaoIniciar = new JButton("Iniciar Jogo");
-        botaoIniciar.setBackground(new Color(30, 100, 200));
-        botaoIniciar.setForeground(new Color(255, 215, 0));
+        botaoIniciar.setBackground(Constantes.AZUL_ESCURO);
+        botaoIniciar.setForeground(Constantes.AMARELO_BRILHANTE);
         botaoIniciar.setFont(Constantes.FONTE_BOTAO);
-        botaoIniciar.setBorder(BorderFactory.createLineBorder(new Color(255, 215, 0), 3));
+        botaoIniciar.setBorder(BorderFactory.createLineBorder(Constantes.AMARELO_BRILHANTE, 3));
         botaoIniciar.setFocusPainted(false);
 
         int botaoX = (fundoIcon.getIconWidth() - 200) / 2;
         botaoIniciar.setBounds(botaoX, 400, 200, 50);
-        botaoIniciar.addActionListener(e -> {
-            dispose();
-            new TelaInst();
+        botaoIniciar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Alterna para a tela de instruções
+                cardLayout.show(cardPanel, "TelaInst");
+            }
         });
 
         fundo.add(botaoIniciar);
-        setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new TelaInicial());
     }
 }
