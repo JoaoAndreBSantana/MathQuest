@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -24,7 +25,7 @@ public class Main {
             // Adiciona as telas ao painel principal
             cardPanel.add(new TelaInicial(cardLayout, cardPanel), "TelaInicial");
             cardPanel.add(new TelaInst(cardLayout, cardPanel), "TelaInst");
-
+            cardPanel.add(new TelaQuiz(cardLayout, cardPanel, 1), "TelaQuiz");
             // Adiciona o painel ao frame e ajusta o tamanho
             frame.add(cardPanel);
             frame.pack(); // Ajusta o tamanho para o conteúdo

@@ -4,7 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TelaInst extends JPanel {
+    private CardLayout cardLayout;
+    private JPanel cardPanel;
+
     public TelaInst(CardLayout cardLayout, JPanel cardPanel) {
+        this.cardLayout = cardLayout;
+        this.cardPanel = cardPanel;
+
         // Configura o layout do painel como nulo para posicionar os componentes manualmente
         setLayout(null);
 
@@ -18,10 +24,10 @@ public class TelaInst extends JPanel {
         JTextArea instrucoes = new JTextArea(
                 "Bem-vindo ao MathQuest!\n\n" +
                         "Regras do Jogo:\n" +
-                        "1. Cada fase tem um número específico de perguntas.\n" +
-                        "2. Você precisa acertar um certo número de perguntas para avançar.\n" +
-                        "3. Se errar muitas perguntas, é Game Over!\n" +
-                        "4. Boa sorte e divirta-se!"
+                        "1.Cada fase tem um número específico de perguntas.\n" +
+                        "2.Você precisa acertar um certo número de perguntas para avançar.\n" +
+                        "3.Se errar muitas perguntas, é Game Over!\n" +
+                        "4.Boa sorte e divirta-se!"
         );
         instrucoes.setFont(Constantes.FONTE_BOTAO);
         instrucoes.setForeground(new Color(200, 230, 255)); // Branco azulado (tom leve de azul)
@@ -30,7 +36,6 @@ public class TelaInst extends JPanel {
         instrucoes.setEditable(false);
         instrucoes.setBounds(50, 100, 700, 300);
         fundo.add(instrucoes);
-
 
         // Botão "Continuar"
         JButton botaoContinuar = new JButton("Continuar");
@@ -45,8 +50,8 @@ public class TelaInst extends JPanel {
         botaoContinuar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aqui você pode adicionar a lógica para continuar para a próxima tela
-                System.out.println("Continuar para o jogo...");
+                // Troca para a tela do jogo (TelaQuiz)
+                cardLayout.show(cardPanel, "TelaQuiz");
             }
         });
 
