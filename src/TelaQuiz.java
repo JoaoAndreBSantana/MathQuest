@@ -105,7 +105,7 @@ public class TelaQuiz extends JFrame implements ActionListener {
         perguntaLabel.setBounds(0, 40, 749, 50); // Centraliza a pergunta
         add(perguntaLabel);
 
-// Botões para as respostas (centralizados)
+        // Botões para as respostas (centralizados)
         botoesRespostas = new JButton[4];
         List<String> alternativas = new ArrayList<>(List.of(perguntas.get(perguntaAtual).getAlternativas()));
         alternativas.add(perguntas.get(perguntaAtual).getRespostaCorreta());
@@ -122,7 +122,7 @@ public class TelaQuiz extends JFrame implements ActionListener {
             botoesRespostas[i].setForeground(Constantes.AZUL_CLARO); // Texto preto
             botoesRespostas[i].setFont(Constantes.FONTE_BOTAO); // Fonte do botão
             botoesRespostas[i].setBorder(BorderFactory.createLineBorder(Constantes.AMARELO_BRILHANTE, 3));
-            botoesRespostas[i].setBounds(x, 100 + (i * (alturaBotao + espacamento)), larguraBotao, alturaBotao); // Posiciona as alternativas
+            botoesRespostas[i].setBounds(x, 150 + (i * (alturaBotao + espacamento)), larguraBotao, alturaBotao); // Posiciona as alternativas
             botoesRespostas[i].addActionListener(this);
             add(botoesRespostas[i]);
         }
@@ -130,13 +130,12 @@ public class TelaQuiz extends JFrame implements ActionListener {
         // Botão de ajuda (canto inferior direito)
         botaoAjuda = new JButton("AJUDA");
         botaoAjuda.setFont(new Font("Arial", Font.PLAIN, 14)); // Fonte menor
-        botaoAjuda.setBounds(480, 20, 80, 30); // Canto superior direito
+        botaoAjuda.setBounds(630, 20, 80, 30); // Canto superior direito
         botaoAjuda.setBackground(Color.WHITE); // Cor de fundo do botão
         botaoAjuda.setForeground(Constantes.VERDE_ESCOLA); // Define a cor do texto como azul
-
-
         botaoAjuda.addActionListener(this);
         add(botaoAjuda);
+
     }
 
     @Override
@@ -260,9 +259,5 @@ public class TelaQuiz extends JFrame implements ActionListener {
         public String[] getAlternativas() {
             return alternativas;
         }
-    }
-
-    public static void main(String[] args) {
-        new TelaQuiz(1); // Inicia o quiz na fase 1
     }
 }
