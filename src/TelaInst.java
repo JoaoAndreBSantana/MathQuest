@@ -50,8 +50,13 @@ public class TelaInst extends JPanel {
         botaoContinuar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Troca para a tela do jogo (TelaQuiz)
-                cardLayout.show(cardPanel, "TelaQuiz");
+                // Fecha a tela atual (TelaInst)
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(TelaInst.this);
+                if (frame != null) {
+                    frame.dispose(); // Fecha a janela atual
+                }
+                // Abre a TelaQuiz como uma nova janela
+                new TelaQuiz(1); // Passa a fase desejada
             }
         });
 

@@ -6,13 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class TelaQuiz extends JPanel implements ActionListener {
+public class TelaQuiz extends JFrame implements ActionListener {
     private int fase;
     private int acertos = 0;
     private int erros = 0;
     private int perguntaAtual = 0; // Controla a pergunta atual
-    private CardLayout cardLayout;
-    private JPanel cardPanel;
     private JLabel perguntaLabel;
     private JButton[] botoesRespostas;
     private JButton botaoAjuda; // Botão de ajuda
@@ -20,32 +18,25 @@ public class TelaQuiz extends JPanel implements ActionListener {
     private String[] respostas;
     private boolean ajudaUsada = false; // Controla se a ajuda foi usada na pergunta atual
 
-    public TelaQuiz(CardLayout cardLayout, JPanel cardPanel, int fase) {
-        this.cardLayout = cardLayout;
-        this.cardPanel = cardPanel;
+    public TelaQuiz(int fase) {
         this.fase = fase;
 
-        // Configura o layout do painel como nulo para posicionar os componentes manualmente
-        setLayout(null);
-
-        // Carrega a imagem de fundo
-        ImageIcon fundoIcon = new ImageIcon(getClass().getResource(Constantes.CAMINHO_FUNDO));
-        JLabel fundo = new JLabel(fundoIcon);
-        fundo.setBounds(0, 0, fundoIcon.getIconWidth(), fundoIcon.getIconHeight());
-        add(fundo);
-
-        // Painel para os componentes (transparente)
-        JPanel componentesPanel = new JPanel();
-        componentesPanel.setLayout(null);
-        componentesPanel.setBounds(0, 0, fundoIcon.getIconWidth(), fundoIcon.getIconHeight());
-        componentesPanel.setOpaque(false); // Torna o painel transparente
-        add(componentesPanel);
+        // Configura a janela
+        setTitle("MathQuest Quiz");
+        setSize(749, 562); // Tamanho da janela ajustado
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null); // Usar layout nulo para posicionamento manual
+        getContentPane().setBackground(Constantes.AZUL_CLARO); // Azul claro
 
         // Inicializa as perguntas e respostas
         inicializarPerguntasERespostas();
 
         // Adiciona componentes do quiz
-        adicionarComponentesQuiz(componentesPanel);
+        adicionarComponentesQuiz();
+
+        // Centraliza a janela na tela
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     private void inicializarPerguntasERespostas() {
@@ -83,36 +74,68 @@ public class TelaQuiz extends JPanel implements ActionListener {
         respostas = fase == 1 ? respostasFase1 : respostasFase2;
     }
 
-    private void adicionarComponentesQuiz(JPanel componentesPanel) {
-        // Centraliza a pergunta
+    private void adicionarComponentesQuiz() {
+        // Label para a pergunta
         perguntaLabel = new JLabel(perguntas[perguntaAtual], SwingConstants.CENTER);
-        perguntaLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Fonte maior e em negrito
-        perguntaLabel.setForeground(Color.BLUE); // Cor da pergunta
-        perguntaLabel.setBounds(0, 50, 749, 50); // Centraliza horizontalmente
-        componentesPanel.add(perguntaLabel);
+        perguntaLabel.setFont(new Font("Arial", Font.BOLD, 26)); // Fonte maior e em negrito
+        perguntaLabel.setForeground(Constantes.AMARELO_BRILHANTE); // Cor da pergunta
+        perguntaLabel.setBounds(0, 40, 600, 50); // Posiciona a pergunta
+        add(perguntaLabel);
 
         // Botões para as respostas (centralizados)
         botoesRespostas = new JButton[4];
         int larguraBotao = 400;
         int alturaBotao = 50;
-        int espacamento = 60;
-        int x = (749 - larguraBotao) / 2; // Centraliza horizontalmente
+        int espacamento = 20; // Menor espaçamento entre os botões
+        int x = (600 - larguraBotao) / 2; // Centraliza horizontalmente
+
+        // Resposta correta
+        String respostaCorreta = respostas[perguntaAtual * 4]; // Resposta correta da pergunta atual
+
+        // Adiciona a resposta correta
+        List<String> alternativas = new ArrayList<>();
+        alternativas.add(respostaCorreta);
+
+        // Adiciona alternativas erradas
+        while (alternativas.size() < 4) {
+            String alternativaErrada = gerarAlternativaErrada(respostaCorreta);
+            if (!alternativas.contains(alternativaErrada)) {
+                alternativas.add(alternativaErrada);
+            }
+        }
+
+        // Embaralha as alternativas
+        java.util.Collections.shuffle(alternativas);
+
+        // Cria os botões de resposta
         for (int i = 0; i < botoesRespostas.length; i++) {
-            botoesRespostas[i] = new JButton(respostas[perguntaAtual * 4 + i]); // Distribui as respostas
+            botoesRespostas[i] = new JButton(alternativas.get(i)); // Distribui as respostas
             botoesRespostas[i].setBackground(Color.WHITE); // Fundo branco
             botoesRespostas[i].setForeground(Color.BLACK); // Texto preto
             botoesRespostas[i].setFont(new Font("Arial", Font.PLAIN, 20)); // Fonte menor
-            botoesRespostas[i].setBounds(x, 150 + (i * espacamento), larguraBotao, alturaBotao); // Centraliza
+            botoesRespostas[i].setBounds(x, 100 + (i * (alturaBotao + espacamento)), larguraBotao, alturaBotao); // Posiciona as alternativas
             botoesRespostas[i].addActionListener(this);
-            componentesPanel.add(botoesRespostas[i]);
+            add(botoesRespostas[i]);
         }
 
-        // Botão de ajuda (canto superior direito)
+        // Botão de ajuda (canto inferior direito)
         botaoAjuda = new JButton("AJUDA");
         botaoAjuda.setFont(new Font("Arial", Font.PLAIN, 14)); // Fonte menor
-        botaoAjuda.setBounds(749 - 100, 20, 80, 30); // Canto superior direito
+        botaoAjuda.setBounds(480, 20, 80, 30); // Canto superior direito
         botaoAjuda.addActionListener(this);
-        componentesPanel.add(botaoAjuda);
+        add(botaoAjuda);
+
+        // Garante que todos os componentes sejam renderizados corretamente
+        revalidate();
+        repaint();
+    }
+
+
+    private String gerarAlternativaErrada(String respostaCorreta) {
+        Random random = new Random();
+        int resposta = Integer.parseInt(respostaCorreta);
+        // Gera uma alternativa errada aleatória (exemplo simples)
+        return String.valueOf(resposta + random.nextInt(10) + 1); // Gera um número entre 1 e 10 a mais que a resposta correta
     }
 
     @Override
@@ -139,7 +162,7 @@ public class TelaQuiz extends JPanel implements ActionListener {
             }
 
             // Aguarda um pouco antes de avançar
-            Timer timer = new Timer(500, new ActionListener() {
+            Timer timer = new Timer(300, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // Avança para a próxima pergunta
@@ -194,19 +217,18 @@ public class TelaQuiz extends JPanel implements ActionListener {
         if (fase == 1) {
             if (acertos >= 5) {
                 JOptionPane.showMessageDialog(this, "Você avançou para a Fase 2!");
-                cardLayout.show(cardPanel, "TelaQuiz2"); // Avança para a Fase 2
+                // Aqui você pode adicionar a lógica para avançar para a próxima tela
             } else if (erros >= 5) {
                 JOptionPane.showMessageDialog(this, "Game Over!");
-                cardLayout.show(cardPanel, "TelaGameOver");
+                // Aqui você pode adicionar a lógica para voltar ao menu ou encerrar o jogo
             }
         } else if (fase == 2) {
             if (acertos >= 10) {
                 JOptionPane.showMessageDialog(this, "Parabéns, você venceu MathQuest!");
-                cardLayout.show(cardPanel, "TelaVitoria");
+                // Aqui você pode adicionar a lógica para finalizar o jogo
             } else if (erros >= 3) {
                 JOptionPane.showMessageDialog(this, "Game Over!");
-                cardLayout.show(cardPanel, "TelaGameOver");
+                // Aqui você pode adicionar a lógica para voltar ao menu ou encerrar o jogo
             }
         }
-    }
-}
+    } }
