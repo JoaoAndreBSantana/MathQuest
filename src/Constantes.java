@@ -6,6 +6,7 @@ public class Constantes {
     public static final Color AMARELO_BRILHANTE = Color.decode("#B7FF5B");
     public static final Color VERMELHO_CLARO = Color.decode("#FF8585");
     public static final Color VERDE_CLARO = Color.decode("#76F592");
+    public static final Color VERDE_ESCOLA = Color.decode("#4CAF50");
 
     public static final String CAMINHO_FUNDO = "/res/tela_fundo.png";
     public static final String CAMINHO_LOGO = "/res/logo_tela_.png";
