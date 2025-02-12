@@ -15,7 +15,9 @@ public class TelaQuiz extends JFrame implements ActionListener {
     private JLabel perguntaLabel;
     private JButton[] botoesRespostas;
     private JButton botaoAjuda; // Botão de ajuda
-    private List<Pergunta> perguntas; // Lista de perguntas
+    private List<Pergunta> perguntasFase1; // Perguntas da Fase 1
+    private List<Pergunta> perguntasFase2; // Perguntas da Fase 2
+    private List<Pergunta> perguntasAtuais; // Perguntas da fase atual
     private boolean ajudaUsada = false; // Controla se a ajuda foi usada na pergunta atual
 
     public TelaQuiz(int fase) {
@@ -31,6 +33,9 @@ public class TelaQuiz extends JFrame implements ActionListener {
         // Inicializa as perguntas e respostas
         inicializarPerguntasERespostas();
 
+        // Define as perguntas da fase atual
+        perguntasAtuais = (fase == 1) ? perguntasFase1 : perguntasFase2;
+
         // Adiciona componentes do quiz
         adicionarComponentesQuiz();
 
@@ -40,66 +45,37 @@ public class TelaQuiz extends JFrame implements ActionListener {
     }
 
     private void inicializarPerguntasERespostas() {
-        perguntas = new ArrayList<>();
+        perguntasFase1 = new ArrayList<>();
+        perguntasFase2 = new ArrayList<>();
 
         // Perguntas e respostas para a fase 1 (adição e subtração)
-        perguntas.add(new Pergunta("1 + 2 = ?", "3", new String[]{"2", "4", "5"}));
-        perguntas.add(new Pergunta("5 - 3 = ?", "2", new String[]{"1", "0", "3"}));
-        perguntas.add(new Pergunta("8 + 6 = ?", "14", new String[]{"12", "16", "10"}));
-        perguntas.add(new Pergunta("10 - 4 = ?", "6", new String[]{"5", "7", "8"}));
-        perguntas.add(new Pergunta("7 + 9 = ?", "16", new String[]{"14", "15", "18"}));
-        perguntas.add(new Pergunta("2 - 11 = ?", "-9", new String[]{"-8", "-10", "-7"}));
-        perguntas.add(new Pergunta("6 + 7 = ?", "13", new String[]{"12", "14", "15"}));
-        perguntas.add(new Pergunta("9 - 3 = ?", "6", new String[]{"5", "4", "7"}));
-        perguntas.add(new Pergunta("4 + 5 = ?", "9", new String[]{"8", "10", "7"}));
-        perguntas.add(new Pergunta("3 - 8 = ?", "-5", new String[]{"-4", "-6", "-3"}));
-        perguntas.add(new Pergunta("12 + 7 = ?", "19", new String[]{"18", "20", "21"}));
-        perguntas.add(new Pergunta("15 - 5 = ?", "10", new String[]{"9", "11", "12"}));
-        perguntas.add(new Pergunta("11 + 2 = ?", "13", new String[]{"12", "14", "15"}));
-        perguntas.add(new Pergunta("14 - 3 = ?", "11", new String[]{"10", "12", "13"}));
-        perguntas.add(new Pergunta("13 + 6 = ?", "19", new String[]{"18", "20", "21"}));
-        perguntas.add(new Pergunta("10 - 2 = ?", "8", new String[]{"7", "6", "9"}));
-        perguntas.add(new Pergunta("7 + 3 = ?", "10", new String[]{"9", "11", "12"}));
-        perguntas.add(new Pergunta("15 - 5 = ?", "10", new String[]{"9", "11", "12"}));
-        perguntas.add(new Pergunta("8 + 4 = ?", "12", new String[]{"11", "13", "14"}));
-        perguntas.add(new Pergunta("9 - 6 = ?", "3", new String[]{"2", "4", "5"}));
-        perguntas.add(new Pergunta("12 - 7 = ?", "5", new String[]{"4", "6", "7"}));
-        perguntas.add(new Pergunta("18 + 9 = ?", "27", new String[]{"26", "28", "25"}));
-        perguntas.add(new Pergunta("14 - 8 = ?", "6", new String[]{"5", "7", "8"}));
-        perguntas.add(new Pergunta("11 - 5 = ?", "6", new String[]{"5", "7", "8"}));
-        perguntas.add(new Pergunta("20 + 10 = ?", "30", new String[]{"29", "31", "32"}));
-        perguntas.add(new Pergunta("17 - 7 = ?", "10", new String[]{"9", "11", "12"}));
-        perguntas.add(new Pergunta("13 - 4 = ?", "9", new String[]{"8", "10", "11"}));
-        perguntas.add(new Pergunta("16 - 8 = ?", "8", new String[]{"7", "9", "10"}));
-        perguntas.add(new Pergunta("19 + 9 = ?", "28", new String[]{"27", "29", "30"}));
-        perguntas.add(new Pergunta("21 - 11 = ?", "10", new String[]{"9", "11", "12"}));
+        perguntasFase1.add(new Pergunta("1 + 2 = ?", "3", new String[]{"2", "4", "5"}));
+        perguntasFase1.add(new Pergunta("5 - 3 = ?", "2", new String[]{"1", "0", "3"}));
+        perguntasFase1.add(new Pergunta("8 + 6 = ?", "14", new String[]{"12", "16", "10"}));
+        perguntasFase1.add(new Pergunta("10 - 4 = ?", "6", new String[]{"5", "7", "8"}));
+        perguntasFase1.add(new Pergunta("7 + 9 = ?", "16", new String[]{"14", "15", "18"}));
+        perguntasFase1.add(new Pergunta("2 - 11 = ?", "-9", new String[]{"-8", "-10", "-7"}));
+        perguntasFase1.add(new Pergunta("6 + 7 = ?", "13", new String[]{"12", "14", "15"}));
+        perguntasFase1.add(new Pergunta("9 - 3 = ?", "6", new String[]{"5", "4", "7"}));
+        perguntasFase1.add(new Pergunta("4 + 5 = ?", "9", new String[]{"8", "10", "7"}));
+        perguntasFase1.add(new Pergunta("3 - 8 = ?", "-5", new String[]{"-4", "-6", "-3"}));
 
-
-        perguntas.add(new Pergunta("2 * 3 = ?", "6", new String[]{"5", "7", "8"}));
-        perguntas.add(new Pergunta("4 * 2 = ?", "8", new String[]{"7", "9", "10"}));
-        perguntas.add(new Pergunta("5 * 2 = ?", "10", new String[]{"9", "11", "12"}));
-        perguntas.add(new Pergunta("3 * 3 = ?", "9", new String[]{"8", "10", "11"}));
-        perguntas.add(new Pergunta("6 * 2 = ?", "12", new String[]{"11", "13", "14"}));
-        perguntas.add(new Pergunta("8 / 2 = ?", "4", new String[]{"3", "5", "6"}));
-        perguntas.add(new Pergunta("9 / 3 = ?", "3", new String[]{"2", "4", "5"}));
-        perguntas.add(new Pergunta("6 / 2 = ?", "3", new String[]{"2", "4", "5"}));
-        perguntas.add(new Pergunta("10 / 2 = ?", "5", new String[]{"4", "6", "7"}));
-        perguntas.add(new Pergunta("12 / 3 = ?", "4", new String[]{"3", "5", "6"}));
-        perguntas.add(new Pergunta("4 * 3 = ?", "12", new String[]{"11", "13", "14"}));
-        perguntas.add(new Pergunta("7 * 2 = ?", "14", new String[]{"12", "16", "18"}));
-        perguntas.add(new Pergunta("8 * 1 = ?", "8", new String[]{"7", "9", "10"}));
-        perguntas.add(new Pergunta("9 * 2 = ?", "18", new String[]{"16", "20", "22"}));
-        perguntas.add(new Pergunta("5 * 3 = ?", "15", new String[]{"14", "16", "18"}));
-        perguntas.add(new Pergunta("10 / 5 = ?", "2", new String[]{"1", "3", "4"}));
-        perguntas.add(new Pergunta("8 / 4 = ?", "2", new String[]{"1", "3", "4"}));
-        perguntas.add(new Pergunta("6 / 3 = ?", "2", new String[]{"1", "3", "4"}));
-        perguntas.add(new Pergunta("12 / 4 = ?", "3", new String[]{"2", "4", "5"}));
-        perguntas.add(new Pergunta("15 / 3 = ?", "5", new String[]{"4", "6", "7"}));
+        // Perguntas e respostas para a fase 2 (multiplicação e divisão)
+        perguntasFase2.add(new Pergunta("2 * 3 = ?", "6", new String[]{"5", "7", "8"}));
+        perguntasFase2.add(new Pergunta("4 * 2 = ?", "8", new String[]{"7", "9", "10"}));
+        perguntasFase2.add(new Pergunta("5 * 2 = ?", "10", new String[]{"9", "11", "12"}));
+        perguntasFase2.add(new Pergunta("3 * 3 = ?", "9", new String[]{"8", "10", "11"}));
+        perguntasFase2.add(new Pergunta("6 * 2 = ?", "12", new String[]{"11", "13", "14"}));
+        perguntasFase2.add(new Pergunta("8 / 2 = ?", "4", new String[]{"3", "5", "6"}));
+        perguntasFase2.add(new Pergunta("9 / 3 = ?", "3", new String[]{"2", "4", "5"}));
+        perguntasFase2.add(new Pergunta("6 / 2 = ?", "3", new String[]{"2", "4", "5"}));
+        perguntasFase2.add(new Pergunta("10 / 2 = ?", "5", new String[]{"4", "6", "7"}));
+        perguntasFase2.add(new Pergunta("12 / 3 = ?", "4", new String[]{"3", "5", "6"}));
     }
 
     private void adicionarComponentesQuiz() {
         // Label para a pergunta
-        perguntaLabel = new JLabel(perguntas.get(perguntaAtual).getPergunta(), SwingConstants.CENTER);
+        perguntaLabel = new JLabel(perguntasAtuais.get(perguntaAtual).getPergunta(), SwingConstants.CENTER);
         perguntaLabel.setFont(Constantes.FONTE_TITULO); // Fonte maior e em negrito
         perguntaLabel.setForeground(Constantes.AMARELO_BRILHANTE); // Cor da pergunta
         perguntaLabel.setBounds(0, 40, 749, 50); // Centraliza a pergunta
@@ -107,8 +83,8 @@ public class TelaQuiz extends JFrame implements ActionListener {
 
         // Botões para as respostas (centralizados)
         botoesRespostas = new JButton[4];
-        List<String> alternativas = new ArrayList<>(List.of(perguntas.get(perguntaAtual).getAlternativas()));
-        alternativas.add(perguntas.get(perguntaAtual).getRespostaCorreta());
+        List<String> alternativas = new ArrayList<>(List.of(perguntasAtuais.get(perguntaAtual).getAlternativas()));
+        alternativas.add(perguntasAtuais.get(perguntaAtual).getRespostaCorreta());
         Collections.shuffle(alternativas);
 
         int larguraBotao = 400;
@@ -135,7 +111,6 @@ public class TelaQuiz extends JFrame implements ActionListener {
         botaoAjuda.setForeground(Constantes.VERDE_ESCOLA); // Define a cor do texto como azul
         botaoAjuda.addActionListener(this);
         add(botaoAjuda);
-
     }
 
     @Override
@@ -153,7 +128,7 @@ public class TelaQuiz extends JFrame implements ActionListener {
             String resposta = botaoClicado.getText();
 
             // Verifica se a resposta está correta
-            if (resposta.equals(perguntas.get(perguntaAtual).getRespostaCorreta())) {
+            if (resposta.equals(perguntasAtuais.get(perguntaAtual).getRespostaCorreta())) {
                 acertos++;
                 botaoClicado.setBackground(Color.GREEN); // Feedback visual para resposta correta
             } else {
@@ -167,7 +142,7 @@ public class TelaQuiz extends JFrame implements ActionListener {
                 public void actionPerformed(ActionEvent e) {
                     // Avança para a próxima pergunta
                     perguntaAtual++;
-                    if (perguntaAtual < perguntas.size()) {
+                    if (perguntaAtual < perguntasAtuais.size()) {
                         atualizarPergunta();
                     } else {
                         verificarFimDoJogo();
@@ -181,7 +156,7 @@ public class TelaQuiz extends JFrame implements ActionListener {
 
     private void eliminarAlternativaErrada() {
         List<JButton> botoesErrados = new ArrayList<>();
-        String respostaCorreta = perguntas.get(perguntaAtual).getRespostaCorreta();
+        String respostaCorreta = perguntasAtuais.get(perguntaAtual).getRespostaCorreta();
 
         // Encontra todos os botões com respostas erradas
         for (JButton botao : botoesRespostas) {
@@ -201,9 +176,9 @@ public class TelaQuiz extends JFrame implements ActionListener {
     }
 
     private void atualizarPergunta() {
-        perguntaLabel.setText(perguntas.get(perguntaAtual).getPergunta());
-        List<String> alternativas = new ArrayList<>(List.of(perguntas.get(perguntaAtual).getAlternativas()));
-        alternativas.add(perguntas.get(perguntaAtual).getRespostaCorreta());
+        perguntaLabel.setText(perguntasAtuais.get(perguntaAtual).getPergunta());
+        List<String> alternativas = new ArrayList<>(List.of(perguntasAtuais.get(perguntaAtual).getAlternativas()));
+        alternativas.add(perguntasAtuais.get(perguntaAtual).getRespostaCorreta());
         Collections.shuffle(alternativas);
 
         for (int i = 0; i < botoesRespostas.length; i++) {
@@ -219,20 +194,21 @@ public class TelaQuiz extends JFrame implements ActionListener {
 
     private void verificarFimDoJogo() {
         if (fase == 1) {
-            if (acertos >= 5) {
+            if (acertos == 7) {
                 JOptionPane.showMessageDialog(this, "Você avançou para a Fase 2!");
-                // Aqui você pode adicionar a lógica para avançar para a próxima tela
-            } else if (erros >= 5) {
+                new TelaQuiz(2); // Inicia a Fase 2
+                dispose(); // Fecha a janela atual
+            } else if (erros == 5) {
                 JOptionPane.showMessageDialog(this, "Game Over!");
-                // Aqui você pode adicionar a lógica para voltar ao menu ou encerrar o jogo
+                System.exit(0); // Fecha o jogo
             }
         } else if (fase == 2) {
-            if (acertos >= 10) {
+            if (acertos == 10) {
                 JOptionPane.showMessageDialog(this, "Parabéns, você venceu MathQuest!");
-                // Aqui você pode adicionar a lógica para finalizar o jogo
-            } else if (erros >= 3) {
+                System.exit(0); // Fecha o jogo
+            } else if (erros == 3) {
                 JOptionPane.showMessageDialog(this, "Game Over!");
-                // Aqui você pode adicionar a lógica para voltar ao menu ou encerrar o jogo
+                System.exit(0); // Fecha o jogo
             }
         }
     }
@@ -259,5 +235,9 @@ public class TelaQuiz extends JFrame implements ActionListener {
         public String[] getAlternativas() {
             return alternativas;
         }
+    }}
+
+    /*public static void main(String[] args) {
+        new TelaQuiz(1);
     }
-}
+}*/
