@@ -131,6 +131,10 @@ public class TelaQuiz extends JFrame implements ActionListener {
         botaoAjuda = new JButton("AJUDA");
         botaoAjuda.setFont(new Font("Arial", Font.PLAIN, 14)); // Fonte menor
         botaoAjuda.setBounds(480, 20, 80, 30); // Canto superior direito
+        botaoAjuda.setBackground(Color.WHITE); // Cor de fundo do botão
+        botaoAjuda.setForeground(Constantes.VERDE_ESCOLA); // Define a cor do texto como azul
+
+
         botaoAjuda.addActionListener(this);
         add(botaoAjuda);
     }
