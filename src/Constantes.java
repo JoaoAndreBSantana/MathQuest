@@ -10,6 +10,7 @@ public class Constantes {
 
     public static final String CAMINHO_FUNDO = "/res/tela_fundo.png";
     public static final String CAMINHO_LOGO = "/res/logo_tela_.png";
+    public static final String MUSICA_JOGO = "/res/msc_fundo.wav";
 
     public static final Font FONTE_TITULO = new Font("Arial", Font.BOLD, 36);
     public static final Font FONTE_BOTAO = new Font("Arial", Font.BOLD, 20);

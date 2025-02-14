@@ -11,35 +11,33 @@ public class TelaQuiz extends JFrame implements ActionListener {
     private int fase;
     private int acertos = 0;
     private int erros = 0;
-    private int perguntaAtual = 0; // Controla a pergunta atual
+    private int perguntaAtual = 0;
     private JLabel perguntaLabel;
     private JButton[] botoesRespostas;
-    private JButton botaoAjuda; // Botão de ajuda
-    private List<Pergunta> perguntasFase1; // Perguntas da Fase 1
-    private List<Pergunta> perguntasFase2; // Perguntas da Fase 2
-    private List<Pergunta> perguntasAtuais; // Perguntas da fase atual
-    private boolean ajudaUsada = false; // Controla se a ajuda foi usada na pergunta atual
+    private JButton botaoAjuda;
+    private List<Pergunta> perguntasFase1;
+    private List<Pergunta> perguntasFase2;
+    private List<Pergunta> perguntasAtuais;
+    private boolean ajudaUsada = false;
 
     public TelaQuiz(int fase) {
         this.fase = fase;
 
-        // Configura a janela
+        // minha janela
         setTitle("MathQuest Quiz");
-        setSize(749, 562); // Tamanho da janela ajustado
+        setSize(749, 562);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null); // Usar layout nulo para posicionamento manual
-        getContentPane().setBackground(Constantes.AZUL_ESCURO); // Azul claro
+        setLayout(null);
+        getContentPane().setBackground(Constantes.AZUL_ESCURO);
 
-        // Inicializa as perguntas e respostas
+        // inicializar as perguntas e respostas
         inicializarPerguntasERespostas();
 
-        // Define as perguntas da fase atual
-        perguntasAtuais = (fase == 1) ? perguntasFase1 : perguntasFase2;
+        // verificar as fases
+         perguntasAtuais = (fase == 1) ? perguntasFase1 : perguntasFase2;
 
-        // Adiciona componentes do quiz
         adicionarComponentesQuiz();
 
-        // Centraliza a janela na tela
         setLocationRelativeTo(null);
         setVisible(true);
     }
@@ -48,7 +46,7 @@ public class TelaQuiz extends JFrame implements ActionListener {
         perguntasFase1 = new ArrayList<>();
         perguntasFase2 = new ArrayList<>();
 
-        // Perguntas e respostas para a fase 1 (adição e subtração)
+        // perguntas da fase 1
         perguntasFase1.add(new Pergunta("1 + 2 = ?", "3", new String[]{"2", "4", "5"}));
         perguntasFase1.add(new Pergunta("5 - 3 = ?", "2", new String[]{"1", "0", "3"}));
         perguntasFase1.add(new Pergunta("8 + 6 = ?", "14", new String[]{"12", "16", "10"}));
@@ -60,7 +58,7 @@ public class TelaQuiz extends JFrame implements ActionListener {
         perguntasFase1.add(new Pergunta("4 + 5 = ?", "9", new String[]{"8", "10", "7"}));
         perguntasFase1.add(new Pergunta("3 - 8 = ?", "-5", new String[]{"-4", "-6", "-3"}));
 
-        // Perguntas e respostas para a fase 2 (multiplicação e divisão)
+        // pergguntas da fase 2
         perguntasFase2.add(new Pergunta("2 * 3 = ?", "6", new String[]{"5", "7", "8"}));
         perguntasFase2.add(new Pergunta("4 * 2 = ?", "8", new String[]{"7", "9", "10"}));
         perguntasFase2.add(new Pergunta("5 * 2 = ?", "10", new String[]{"9", "11", "12"}));
@@ -74,14 +72,14 @@ public class TelaQuiz extends JFrame implements ActionListener {
     }
 
     private void adicionarComponentesQuiz() {
-        // Label para a pergunta
+
         perguntaLabel = new JLabel(perguntasAtuais.get(perguntaAtual).getPergunta(), SwingConstants.CENTER);
-        perguntaLabel.setFont(Constantes.FONTE_TITULO); // Fonte maior e em negrito
-        perguntaLabel.setForeground(Constantes.AMARELO_BRILHANTE); // Cor da pergunta
-        perguntaLabel.setBounds(0, 40, 749, 50); // Centraliza a pergunta
+        perguntaLabel.setFont(Constantes.FONTE_TITULO);
+        perguntaLabel.setForeground(Constantes.AMARELO_BRILHANTE);
+        perguntaLabel.setBounds(0, 40, 749, 50);
         add(perguntaLabel);
 
-        // Botões para as respostas (centralizados)
+
         botoesRespostas = new JButton[4];
         List<String> alternativas = new ArrayList<>(List.of(perguntasAtuais.get(perguntaAtual).getAlternativas()));
         alternativas.add(perguntasAtuais.get(perguntaAtual).getRespostaCorreta());
@@ -89,26 +87,26 @@ public class TelaQuiz extends JFrame implements ActionListener {
 
         int larguraBotao = 400;
         int alturaBotao = 50;
-        int espacamento = 20; // Espaçamento entre os botões
+        int espacamento = 20;
         int x = (749 - larguraBotao) / 2; // Centraliza horizontalmente
 
         for (int i = 0; i < botoesRespostas.length; i++) {
-            botoesRespostas[i] = new JButton(alternativas.get(i)); // Distribui as respostas
-            botoesRespostas[i].setBackground(Color.WHITE); // Fundo branco
-            botoesRespostas[i].setForeground(Constantes.AZUL_CLARO); // Texto preto
-            botoesRespostas[i].setFont(Constantes.FONTE_BOTAO); // Fonte do botão
+            botoesRespostas[i] = new JButton(alternativas.get(i));
+            botoesRespostas[i].setBackground(Color.WHITE);
+            botoesRespostas[i].setForeground(Constantes.AZUL_CLARO);
+            botoesRespostas[i].setFont(Constantes.FONTE_BOTAO);
             botoesRespostas[i].setBorder(BorderFactory.createLineBorder(Constantes.AMARELO_BRILHANTE, 3));
-            botoesRespostas[i].setBounds(x, 150 + (i * (alturaBotao + espacamento)), larguraBotao, alturaBotao); // Posiciona as alternativas
+            botoesRespostas[i].setBounds(x, 150 + (i * (alturaBotao + espacamento)), larguraBotao, alturaBotao);
             botoesRespostas[i].addActionListener(this);
             add(botoesRespostas[i]);
         }
 
-        // Botão de ajuda (canto inferior direito)
+
         botaoAjuda = new JButton("AJUDA");
-        botaoAjuda.setFont(new Font("Arial", Font.PLAIN, 14)); // Fonte menor
-        botaoAjuda.setBounds(630, 20, 80, 30); // Canto superior direito
-        botaoAjuda.setBackground(Color.WHITE); // Cor de fundo do botão
-        botaoAjuda.setForeground(Constantes.VERDE_ESCOLA); // Define a cor do texto como azul
+        botaoAjuda.setFont(new Font("Arial", Font.PLAIN, 14));
+        botaoAjuda.setBounds(630, 20, 80, 30);
+        botaoAjuda.setBackground(Color.WHITE);
+        botaoAjuda.setForeground(Constantes.VERDE_ESCOLA);
         botaoAjuda.addActionListener(this);
         add(botaoAjuda);
     }
@@ -116,32 +114,32 @@ public class TelaQuiz extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == botaoAjuda) {
-            // Lógica do botão de ajuda
+
             if (!ajudaUsada) {
                 eliminarAlternativaErrada();
-                ajudaUsada = true; // Marca que a ajuda foi usada nesta pergunta
-                botaoAjuda.setEnabled(false); // Desabilita o botão de ajuda
+                ajudaUsada = true;
+                botaoAjuda.setEnabled(false);
             }
         } else {
-            // Lógica dos botões de resposta
+
             JButton botaoClicado = (JButton) e.getSource();
             String resposta = botaoClicado.getText();
 
-            // Verifica se a resposta está correta
+            // verificando se a resposta esta correta
             if (resposta.equals(perguntasAtuais.get(perguntaAtual).getRespostaCorreta())) {
                 acertos++;
-                botaoClicado.setBackground(Color.GREEN); // Feedback visual para resposta correta
+                botaoClicado.setBackground(Color.GREEN);
             } else {
                 erros++;
-                botaoClicado.setBackground(Color.RED); // Feedback visual para resposta incorreta
+                botaoClicado.setBackground(Color.RED);
             }
 
-            // Aguarda um pouco antes de avançar
+            // aguarda um pouco antes de avançar
             Timer timer = new Timer(300, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // Avança para a próxima pergunta
-                    perguntaAtual++;
+
+                    perguntaAtual++;//avança a pergunta
                     if (perguntaAtual < perguntasAtuais.size()) {
                         atualizarPergunta();
                     } else {
@@ -149,7 +147,7 @@ public class TelaQuiz extends JFrame implements ActionListener {
                     }
                 }
             });
-            timer.setRepeats(false); // O timer só executa uma vez
+            timer.setRepeats(false);
             timer.start();
         }
     }
@@ -158,20 +156,22 @@ public class TelaQuiz extends JFrame implements ActionListener {
         List<JButton> botoesErrados = new ArrayList<>();
         String respostaCorreta = perguntasAtuais.get(perguntaAtual).getRespostaCorreta();
 
-        // Encontra todos os botões com respostas erradas
+
         for (JButton botao : botoesRespostas) {
             if (!botao.getText().equals(respostaCorreta)) {
                 botoesErrados.add(botao);
             }
         }
 
-        // Escolhe um botão errado aleatoriamente e o desabilita
+        // escolhendo botao aleatorio e o desabilitando
         if (!botoesErrados.isEmpty()) {
+
             Random random = new Random();
             int indice = random.nextInt(botoesErrados.size());
+
             JButton botaoErrado = botoesErrados.get(indice);
-            botaoErrado.setEnabled(false); // Desabilita o botão
-            botaoErrado.setText(botaoErrado.getText() + " (X)"); // Adiciona um "X" ao texto
+            botaoErrado.setEnabled(false);
+            botaoErrado.setText(botaoErrado.getText() + " (X)");
         }
     }
 
@@ -183,11 +183,11 @@ public class TelaQuiz extends JFrame implements ActionListener {
 
         for (int i = 0; i < botoesRespostas.length; i++) {
             botoesRespostas[i].setText(alternativas.get(i));
-            botoesRespostas[i].setBackground(Color.WHITE); // Reseta a cor do botão
-            botoesRespostas[i].setEnabled(true); // Reabilita todos os botões
+            botoesRespostas[i].setBackground(Color.WHITE);
+            botoesRespostas[i].setEnabled(true);
         }
 
-        // Redefine o botão de ajuda para a nova pergunta
+        // reedefine o botao de ajuda para a nova pergunta
         ajudaUsada = false;
         botaoAjuda.setEnabled(true);
     }
