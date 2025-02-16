@@ -22,6 +22,10 @@ public class TelaQuiz extends JFrame implements ActionListener {
 
     public TelaQuiz(int fase) {
         this.fase = fase;
+        this.acertos = 0; // Reinicia a contagem de acertos
+        this.erros = 0; // Reinicia a contagem de erros
+        this.perguntaAtual = 0; // Reinicia a pergunta atual
+        this.ajudaUsada = false; // Reinicia o uso da ajuda
 
         // minha janela
         setTitle("MathQuest Quiz");
@@ -34,7 +38,7 @@ public class TelaQuiz extends JFrame implements ActionListener {
         inicializarPerguntasERespostas();
 
         // verificar as fases
-         perguntasAtuais = (fase == 1) ? perguntasFase1 : perguntasFase2;
+        perguntasAtuais = (fase == 1) ? perguntasFase1 : perguntasFase2;
 
         adicionarComponentesQuiz();
 
@@ -120,12 +124,12 @@ public class TelaQuiz extends JFrame implements ActionListener {
                 ajudaUsada = true;
                 botaoAjuda.setEnabled(false);
             }
-        } else {
 
+        } else {
             JButton botaoClicado = (JButton) e.getSource();
             String resposta = botaoClicado.getText();
 
-            // verificando se a resposta esta correta
+            // Verificando se a resposta está correta
             if (resposta.equals(perguntasAtuais.get(perguntaAtual).getRespostaCorreta())) {
                 acertos++;
                 botaoClicado.setBackground(Color.GREEN);
@@ -134,24 +138,28 @@ public class TelaQuiz extends JFrame implements ActionListener {
                 botaoClicado.setBackground(Color.RED);
             }
 
-            // aguarda um pouco antes de avançar
-            Timer timer = new Timer(300, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
+            // Verifica se o jogo deve terminar após esta resposta
+            verificarFimDoJogo();
 
-                    perguntaAtual++;//avança a pergunta
-                    if (perguntaAtual < perguntasAtuais.size()) {
-                        atualizarPergunta();
-                    } else {
-                        verificarFimDoJogo();
+            // Só avança para a próxima pergunta se o jogo não tiver terminado
+            if ((fase == 1 && erros < 5 && acertos < 7) || (fase == 2 && erros < 3 && acertos < 10)) {
+                // Aguarda um pouco antes de avançar
+                Timer timer = new Timer(300, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        perguntaAtual++; // Avança a pergunta
+                        if (perguntaAtual < perguntasAtuais.size()) {
+                            atualizarPergunta();
+                        } else {
+                            verificarFimDoJogo(); // Verifica novamente ao final das perguntas
+                        }
                     }
-                }
-            });
-            timer.setRepeats(false);
-            timer.start();
+                });
+                timer.setRepeats(false);
+                timer.start();
+            }
         }
     }
-
     private void eliminarAlternativaErrada() {
         List<JButton> botoesErrados = new ArrayList<>();
         String respostaCorreta = perguntasAtuais.get(perguntaAtual).getRespostaCorreta();
