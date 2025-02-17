@@ -56,24 +56,58 @@ public class TelaQuiz extends JFrame implements ActionListener {
         perguntasFase1.add(new Pergunta("8 + 6 = ?", "14", new String[]{"12", "16", "10"}));
         perguntasFase1.add(new Pergunta("10 - 4 = ?", "6", new String[]{"5", "7", "8"}));
         perguntasFase1.add(new Pergunta("7 + 9 = ?", "16", new String[]{"14", "15", "18"}));
-        perguntasFase1.add(new Pergunta("2 - 11 = ?", "-9", new String[]{"-8", "-10", "-7"}));
+        perguntasFase1.add(new Pergunta("2 - 11 = ?", "-9", new String[]{"8", "10", "7"}));
         perguntasFase1.add(new Pergunta("6 + 7 = ?", "13", new String[]{"12", "14", "15"}));
         perguntasFase1.add(new Pergunta("9 - 3 = ?", "6", new String[]{"5", "4", "7"}));
         perguntasFase1.add(new Pergunta("4 + 5 = ?", "9", new String[]{"8", "10", "7"}));
-        perguntasFase1.add(new Pergunta("3 - 8 = ?", "-5", new String[]{"-4", "-6", "-3"}));
+        perguntasFase1.add(new Pergunta("3 - 8 = ?", "-5", new String[]{"4", "6", "3"}));
+        perguntasFase1.add(new Pergunta("3 + 4 = ?", "7", new String[]{"8", "6", "9"}));
+        perguntasFase1.add(new Pergunta("5 - 2 = ?", "3", new String[]{"4", "5", "6"}));
+        perguntasFase1.add(new Pergunta("9 + 3 = ?", "12", new String[]{"11", "13", "10"}));
+        perguntasFase1.add(new Pergunta("4 - 3 = ?", "1", new String[]{"2", "3", "4"}));
+        perguntasFase1.add(new Pergunta("6 + 8 = ?", "14", new String[]{"15", "13", "12"}));
+        perguntasFase1.add(new Pergunta("10 - 5 = ?", "5", new String[]{"6", "4", "3"}));
+        perguntasFase1.add(new Pergunta("7 + 2 = ?", "9", new String[]{"8", "10", "6"}));
+        perguntasFase1.add(new Pergunta("11 - 7 = ?", "4", new String[]{"3", "2", "5"}));
+        perguntasFase1.add(new Pergunta("8 + 4 = ?", "12", new String[]{"10", "13", "9"}));
+        perguntasFase1.add(new Pergunta("6 - 1 = ?", "5", new String[]{"4", "3", "2"}));
+
 
         // pergguntas da fase 2
-        perguntasFase2.add(new Pergunta("2 * 3 = ?", "6", new String[]{"5", "7", "8"}));
-        perguntasFase2.add(new Pergunta("4 * 2 = ?", "8", new String[]{"7", "9", "10"}));
-        perguntasFase2.add(new Pergunta("5 * 2 = ?", "10", new String[]{"9", "11", "12"}));
-        perguntasFase2.add(new Pergunta("3 * 3 = ?", "9", new String[]{"8", "10", "11"}));
-        perguntasFase2.add(new Pergunta("6 * 2 = ?", "12", new String[]{"11", "13", "14"}));
+        perguntasFase2.add(new Pergunta("6 x 2 = ?", "12", new String[]{"11", "13", "14"}));
+        perguntasFase2.add(new Pergunta("5 x 2 = ?", "10", new String[]{"9", "11", "12"}));
+        perguntasFase2.add(new Pergunta("10 / 2 = ?", "5", new String[]{"4", "6", "7"}));
         perguntasFase2.add(new Pergunta("8 / 2 = ?", "4", new String[]{"3", "5", "6"}));
         perguntasFase2.add(new Pergunta("9 / 3 = ?", "3", new String[]{"2", "4", "5"}));
+        perguntasFase2.add(new Pergunta("3 x 3 = ?", "9", new String[]{"8", "10", "11"}));
         perguntasFase2.add(new Pergunta("6 / 2 = ?", "3", new String[]{"2", "4", "5"}));
-        perguntasFase2.add(new Pergunta("10 / 2 = ?", "5", new String[]{"4", "6", "7"}));
+        perguntasFase2.add(new Pergunta("2 x 3 = ?", "6", new String[]{"5", "7", "8"}));
         perguntasFase2.add(new Pergunta("12 / 3 = ?", "4", new String[]{"3", "5", "6"}));
+        perguntasFase2.add(new Pergunta("4 x 2 = ?", "8", new String[]{"7", "9", "10"}));
+        perguntasFase2.add(new Pergunta("5 x 4 = ?", "20", new String[]{"19", "21", "22"}));
+        perguntasFase2.add(new Pergunta("7 x 3 = ?", "21", new String[]{"20", "19", "22"}));
+        perguntasFase2.add(new Pergunta("12 / 4 = ?", "3", new String[]{"2", "4", "5"}));
+        perguntasFase2.add(new Pergunta("6 x 4 = ?", "24", new String[]{"23", "25", "22"}));
+        perguntasFase2.add(new Pergunta("9 x 2 = ?", "18", new String[]{"17", "19", "20"}));
+        perguntasFase2.add(new Pergunta("18 / 6 = ?", "3", new String[]{"4", "2", "1"}));
+        perguntasFase2.add(new Pergunta("10 / 5 = ?", "2", new String[]{"3", "1", "4"}));
+        perguntasFase2.add(new Pergunta("14 / 7 = ?", "2", new String[]{"3", "1", "4"}));
+        perguntasFase2.add(new Pergunta("3 x 4 = ?", "12", new String[]{"11", "13", "14"}));
+        perguntasFase2.add(new Pergunta("5 x 6 = ?", "30", new String[]{"29", "32", "33"}));
+        perguntasFase2.add(new Pergunta("8 x 3 = ?", "24", new String[]{"23", "25", "26"}));
+        perguntasFase2.add(new Pergunta("20 / 5 = ?", "4", new String[]{"5", "3", "6"}));
+        perguntasFase2.add(new Pergunta("6 x 7 = ?", "42", new String[]{"41", "40", "39"}));
+        perguntasFase2.add(new Pergunta("8 / 4 = ?", "2", new String[]{"3", "5", "4"}));
+        perguntasFase2.add(new Pergunta("16 / 4 = ?", "4", new String[]{"3", "5", "6"}));
+        perguntasFase2.add(new Pergunta("9 x 4 = ?", "36", new String[]{"35", "37", "38"}));
+        perguntasFase2.add(new Pergunta("7 x 5 = ?", "35", new String[]{"36", "34", "33"}));
+        perguntasFase2.add(new Pergunta("12 / 6 = ?", "2", new String[]{"3", "4", "5"}));
+        perguntasFase2.add(new Pergunta("4 x 5 = ?", "20", new String[]{"19", "18", "22"}));
+        perguntasFase2.add(new Pergunta("6 x 2 = ?", "12", new String[]{"11", "13", "14"}));
+
     }
+    private JLabel labelAcertos;
+    private JLabel labelErros;
 
     private void adicionarComponentesQuiz() {
 
@@ -113,6 +147,19 @@ public class TelaQuiz extends JFrame implements ActionListener {
         botaoAjuda.setForeground(Constantes.VERDE_ESCOLA);
         botaoAjuda.addActionListener(this);
         add(botaoAjuda);
+
+        // Adiciona os labels de acertos e erros
+        labelAcertos = new JLabel("Acertos: " + acertos);
+        labelAcertos.setFont(new Font("Arial", Font.BOLD, 14));
+        labelAcertos.setForeground(Color.GREEN);
+        labelAcertos.setBounds(10, 10, 150, 30);
+        add(labelAcertos);
+
+        labelErros = new JLabel("Erros: " + erros);
+        labelErros.setFont(new Font("Arial", Font.BOLD, 14));
+        labelErros.setForeground(Color.RED);
+        labelErros.setBounds(170, 10, 150, 30);
+        add(labelErros);
     }
 
     @Override
@@ -137,6 +184,9 @@ public class TelaQuiz extends JFrame implements ActionListener {
                 erros++;
                 botaoClicado.setBackground(Color.RED);
             }
+            // Atualiza os labels de acertos e erros
+            labelAcertos.setText("Acertos: " + acertos);
+            labelErros.setText("Erros: " + erros);
 
             // Verifica se o jogo deve terminar após esta resposta
             verificarFimDoJogo();
