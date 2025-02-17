@@ -22,15 +22,22 @@ public class TelaInst extends JPanel {
 
         // Texto das instruções
         JTextArea instrucoes = new JTextArea(
-                "Bem-vindo ao MathQuest!\n\n" +
-                        "Regras do Jogo:\n" +
-                        "1.Cada fase tem um número específico de perguntas.\n" +
-                        "2.Você precisa acertar um certo número de perguntas para avançar.\n" +
-                        "3.Se errar muitas perguntas, é Game Over!\n" +
-                        "4.Boa sorte e divirta-se!"
+                "Regras do MathQuest:\n\n" +
+                        "Fase 1:\n" +
+                        "- Acerte 7 perguntas para avançar.\n" +
+                        "- Erre 5 e é Game Over.\n" +
+                        "- Usa adição e subtração.\n" +
+                        "Fase 2:\n" +
+                        "- Acerte 10 para vencer.\n" +
+                        "- Erre 3 e perde.\n" +
+                        "- Usa multiplicação e divisão.\n" +
+                        "AJUDA:\n" +
+                        "- Você pode eliminar 1 alternativa errada por pergunta."
         );
+
+
         instrucoes.setFont(Constantes.FONTE_BOTAO);
-        instrucoes.setForeground(new Color(200, 230, 255)); // Branco azulado (tom leve de azul)
+        instrucoes.setForeground(new Color(240, 248, 255)); // Branco azulado (tom leve de azul)
         instrucoes.setOpaque(false); // Fundo transparente
         instrucoes.setBackground(new Color(0, 0, 0, 0)); // Fundo invisível
         instrucoes.setEditable(false);
