@@ -11,16 +11,16 @@ public class TelaInst extends JPanel {
         this.cardLayout = cardLayout;
         this.cardPanel = cardPanel;
 
-        // Configura o layout do painel como nulo para posicionar os componentes manualmente
+
         setLayout(null);
 
-        // Carrega a imagem de fundo
+
         ImageIcon fundoIcon = new ImageIcon(getClass().getResource(Constantes.CAMINHO_FUNDO));
         JLabel fundo = new JLabel(fundoIcon);
         fundo.setBounds(0, 0, fundoIcon.getIconWidth(), fundoIcon.getIconHeight());
         add(fundo);
 
-        // Texto das instruções
+
         JTextArea instrucoes = new JTextArea(
                 "Regras do MathQuest:\n\n" +
                         "Fase 1:\n" +
@@ -37,14 +37,14 @@ public class TelaInst extends JPanel {
 
 
         instrucoes.setFont(Constantes.FONTE_BOTAO);
-        instrucoes.setForeground(new Color(240, 248, 255)); // Branco azulado (tom leve de azul)
+        instrucoes.setForeground(new Color(240, 248, 255));
         instrucoes.setOpaque(false); // Fundo transparente
-        instrucoes.setBackground(new Color(0, 0, 0, 0)); // Fundo invisível
+        instrucoes.setBackground(new Color(0, 0, 0, 0));
         instrucoes.setEditable(false);
         instrucoes.setBounds(50, 100, 700, 300);
         fundo.add(instrucoes);
 
-        // Botão "Continuar"
+
         JButton botaoContinuar = new JButton("Continuar");
         botaoContinuar.setBackground(Constantes.AZUL_ESCURO);
         botaoContinuar.setForeground(Constantes.AMARELO_BRILHANTE);
@@ -57,13 +57,13 @@ public class TelaInst extends JPanel {
         botaoContinuar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Fecha a tela atual (TelaInst)
+
                 JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(TelaInst.this);
                 if (frame != null) {
-                    frame.dispose(); // Fecha a janela atual
+                    frame.dispose();
                 }
-                // Abre a TelaQuiz como uma nova janela
-                new TelaQuiz(1); // Passa a fase desejada
+
+                new TelaQuiz(1);
             }
         });
 

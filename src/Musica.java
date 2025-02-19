@@ -6,7 +6,7 @@ public class Musica {
     private Clip clip;
 
     public void tocar(String caminho) {
-        new Thread(() -> { // Executa em uma thread separada
+        new Thread(() -> {
             try {
                 URL url = getClass().getResource(caminho);
                 if (url == null) {
@@ -17,7 +17,7 @@ public class Musica {
                 AudioInputStream audioStream = AudioSystem.getAudioInputStream(url);
                 clip = AudioSystem.getClip();
                 clip.open(audioStream);
-                clip.loop(Clip.LOOP_CONTINUOUSLY); // Música em loop
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
                 clip.start();
             } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
                 e.printStackTrace();

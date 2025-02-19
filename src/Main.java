@@ -4,7 +4,7 @@ import java.awt.*;
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            // Inicia a música
+
             Musica musica = new Musica();
             musica.tocar(Constantes.MUSICA_JOGO);
 
