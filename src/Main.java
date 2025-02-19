@@ -13,6 +13,7 @@ public class Main {
             int altura = fundoIcon.getIconHeight();
 
 
+
             JFrame frame = new JFrame("MathQuest");
             frame.setSize(largura, altura);
             frame.setResizable(false);
