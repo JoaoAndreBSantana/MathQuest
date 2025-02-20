@@ -150,13 +150,13 @@ public class TelaQuiz extends JFrame implements ActionListener {
 
 
         labelAcertos = new JLabel("Acertos: " + acertos);
-        labelAcertos.setFont(new Font("Arial", Font.BOLD, 14));
+        labelAcertos.setFont(new Font("Arial", Font.BOLD, 18));
         labelAcertos.setForeground(Color.GREEN);
         labelAcertos.setBounds(10, 10, 150, 30);
         add(labelAcertos);
 
         labelErros = new JLabel("Erros: " + erros);
-        labelErros.setFont(new Font("Arial", Font.BOLD, 14));
+        labelErros.setFont(new Font("Arial", Font.BOLD, 18));
         labelErros.setForeground(Color.RED);
         labelErros.setBounds(170, 10, 150, 30);
         add(labelErros);
@@ -176,7 +176,7 @@ public class TelaQuiz extends JFrame implements ActionListener {
             JButton botaoClicado = (JButton) e.getSource();
             String resposta = botaoClicado.getText();
 
-            // Verificando se a resposta está correta
+
             if (resposta.equals(perguntasAtuais.get(perguntaAtual).getRespostaCorreta())) {
                 acertos++;
                 botaoClicado.setBackground(Color.GREEN);
@@ -193,7 +193,7 @@ public class TelaQuiz extends JFrame implements ActionListener {
 
 
             if ((fase == 1 && erros < 5 && acertos < 7) || (fase == 2 && erros < 3 && acertos < 10)) {
-
+//atraso antes da avançar as pergunta
                 Timer timer = new Timer(300, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -223,7 +223,7 @@ public class TelaQuiz extends JFrame implements ActionListener {
 
 
         if (!botoesErrados.isEmpty()) {
-
+        // elimina uma alternativa entre os indices
             Random random = new Random();
             int indice = random.nextInt(botoesErrados.size());
 
@@ -232,13 +232,13 @@ public class TelaQuiz extends JFrame implements ActionListener {
             botaoErrado.setText(botaoErrado.getText() + " (X)");
         }
     }
-
+//atualiza o rótulo da pergunta e prepara as alternativas
     private void atualizarPergunta() {
         perguntaLabel.setText(perguntasAtuais.get(perguntaAtual).getPergunta());
         List<String> alternativas = new ArrayList<>(List.of(perguntasAtuais.get(perguntaAtual).getAlternativas()));
         alternativas.add(perguntasAtuais.get(perguntaAtual).getRespostaCorreta());
         Collections.shuffle(alternativas);
-
+    //atualiza botao de resposta
         for (int i = 0; i < botoesRespostas.length; i++) {
             botoesRespostas[i].setText(alternativas.get(i));
             botoesRespostas[i].setBackground(Color.WHITE);
@@ -270,7 +270,7 @@ public class TelaQuiz extends JFrame implements ActionListener {
             }
         }
     }
-
+//apenas para encapsular ...
     private class Pergunta {
         private String pergunta;
         private String respostaCorreta;

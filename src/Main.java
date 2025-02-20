@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
 
-            Musica musica = new Musica();
+           Musica musica = new Musica();
             musica.tocar(Constantes.MUSICA_JOGO);
 
             ImageIcon fundoIcon = new ImageIcon(Main.class.getResource(Constantes.CAMINHO_FUNDO));
