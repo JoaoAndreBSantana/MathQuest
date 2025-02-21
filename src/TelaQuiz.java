@@ -27,7 +27,6 @@ public class TelaQuiz extends JFrame implements ActionListener {
         this.perguntaAtual = 0;
         this.ajudaUsada = false;
 
-
         setTitle("MathQuest Quiz");
         setSize(749, 562);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
