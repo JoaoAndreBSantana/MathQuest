@@ -149,13 +149,13 @@ public class TelaQuiz extends JFrame implements ActionListener {
 
 
         labelAcertos = new JLabel("Acertos: " + acertos);
-        labelAcertos.setFont(new Font("Arial", Font.BOLD, 18));
+        labelAcertos.setFont(new Font("Arial", Font.BOLD,18));
         labelAcertos.setForeground(Color.GREEN);
         labelAcertos.setBounds(10, 10, 150, 30);
         add(labelAcertos);
 
         labelErros = new JLabel("Erros: " + erros);
-        labelErros.setFont(new Font("Arial", Font.BOLD, 18));
+        labelErros.setFont(new Font("Arial", Font.BOLD,18));
         labelErros.setForeground(Color.RED);
         labelErros.setBounds(170, 10, 150, 30);
         add(labelErros);
